@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>X-ray Analytics — Double Your Marketing ROI in 90 Days</title>
+<!-- Benzin (заголовки) с Fontshare -->
+<link href="https://api.fontshare.com/v2/css?f[]=benzin@700,800&display=swap" rel="stylesheet">
+<!-- Russo One (логотип, замена Lozung) + Montserrat (основной текст) -->
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #080808;
+  --bg2:     #0f0f0f;
+  --bg3:     #161616;
+  --bg4:     #1c1c1c;
+  --y:       #f0d800;       /* желтый акцент */
+  --y-dim:   rgba(240,216,0,0.1);
+  --y-glow:  rgba(240,216,0,0.22);
+  --w:       #ffffff;
+  --w70:     rgba(255,255,255,0.7);
+  --w40:     rgba(255,255,255,0.4);
+  --w15:     rgba(255,255,255,0.15);
+  --w08:     rgba(255,255,255,0.08);
+  --border:  rgba(255,255,255,0.08);
+  --red:     #ff4d4d;
+  --green:   #34c759;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  font-family:'Montserrat', sans-serif;
+  background: var(--bg);
+  color: var(--w);
+  overflow-x: hidden;
+  background-image: radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 0 48px; height:60px;
+  background: rgba(8,8,8,0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-family:'Russo One', sans-serif;
+  font-size: 20px; font-weight: 400;
+  color: var(--w); letter-spacing: 0.5px;
+  line-height: 1; text-transform: uppercase;
+}
+.logo .x { color: var(--y); }
+.logo .dot { color: var(--w40); font-size: 14px; font-weight: 400; }
+
+.nav-links { display:flex; gap:28px; }
+.nav-link { font-size:13px; color:var(--w40); cursor:pointer; background:none; border:none; color:var(--w40); transition:color .15s; font-family:'Montserrat',sans-serif; }
+.nav-link:hover { color:var(--w); }
+
+.nav-cta {
+  background:var(--y); color:#000;
+  border:none; border-radius:7px;
+  padding:8px 18px; font-family:'Montserrat',sans-serif;
+  font-size:13px; font-weight:500; cursor:pointer;
+  transition:opacity .2s;
+}
+.nav-cta:hover { opacity:.85; }
+
+/* ── HERO ── */
+.hero-wrap {
+  padding: 100px 48px 72px;
+  max-width:1280px; margin:0 auto;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:64px; align-items:center;
+}
+
+.hero-badge {
+  display:inline-flex; align-items:center; gap:7px;
+  border:1px solid rgba(240,216,0,0.25); border-radius:100px;
+  padding:4px 14px; font-size:11px; font-weight:500; color:var(--y);
+  letter-spacing:1.5px; text-transform:uppercase;
+  background: rgba(240,216,0,0.07); margin-bottom:20px;
+}
+.badge-dot { width:5px; height:5px; border-radius:50%; background:var(--y); animation:blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+h1 {
+  font-family:'Benzin',sans-serif;
+  font-size: clamp(38px, 4vw, 58px);
+  font-weight:800; line-height:1.06; letter-spacing:-2px;
+  margin-bottom:18px;
+}
+h1 em { font-style:normal; color:var(--y); }
+
+.hero-sub {
+  font-size:16px; line-height:1.7; color:var(--w40);
+  max-width:440px; margin-bottom:32px;
+}
+.hero-sub strong { color:var(--w70); }
+
+.hero-btns { display:flex; gap:10px; margin-bottom:32px; }
+.btn-y {
+  background:var(--y); color:#000; border:none; border-radius:8px;
+  padding:12px 24px; font-family:'Montserrat',sans-serif;
+  font-size:14px; font-weight:500; cursor:pointer;
+  transition:opacity .2s, box-shadow .2s;
+}
+.btn-y:hover { opacity:.88; box-shadow:0 0 24px var(--y-glow); }
+.btn-ghost {
+  background:transparent; color:var(--w70); border:1px solid var(--border);
+  border-radius:8px; padding:12px 24px; font-family:'Montserrat',sans-serif;
+  font-size:14px; cursor:pointer; transition:border-color .15s, color .15s;
+}
+.btn-ghost:hover { border-color:var(--w15); color:var(--w); }
+
+.hero-trust {
+  display:flex; align-items:center; gap:16px;
+  font-size:12px; color:var(--w40);
+}
+.tsep { width:1px; height:12px; background:var(--w08); }
+
+/* ── DASHBOARD MOCKUP ── */
+.dash-frame {
+  border:1px solid var(--border); border-radius:14px;
+  overflow:hidden; background:var(--bg2);
+  box-shadow:0 32px 80px rgba(0,0,0,0.55);
+  position:relative;
+}
+.scan-line {
+  position:absolute; left:0; right:0; height:1px;
+  background: linear-gradient(90deg, transparent, rgba(240,216,0,0.5), transparent);
+  animation: scanDown 2.8s ease-in-out infinite;
+  pointer-events:none; z-index:10;
+}
+@keyframes scanDown { 0%{top:0;opacity:0} 10%{opacity:1} 90%{opacity:1} 100%{top:100%;opacity:0} }
+
+.topbar {
+  display:flex; align-items:center; gap:8px;
+  padding:10px 14px; background:var(--bg3);
+  border-bottom:1px solid var(--border);
+}
+.tdot { width:9px; height:9px; border-radius:50%; }
+.tbar-title { font-size:11px; color:var(--w40); margin-left:6px; }
+
+.dash-body { padding:14px; display:flex; flex-direction:column; gap:10px; }
+
+/* метрики */
+.metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:7px; }
+.mc { background:var(--bg3); border:1px solid var(--border); border-radius:9px; padding:10px 12px; }
+.ml { font-size:9px; color:var(--w40); text-transform:uppercase; letter-spacing:.7px; margin-bottom:5px; }
+.mv { font-size:17px; font-weight:700; font-family:'Benzin',sans-serif; }
+.md { font-size:9px; margin-top:3px; }
+.up { color:var(--green); } .dn { color:var(--red); }
+
+/* чарты */
+.charts { display:grid; grid-template-columns:3fr 2fr; gap:7px; }
+.cc { background:var(--bg3); border:1px solid var(--border); border-radius:9px; padding:10px 12px; }
+.cl { font-size:9px; color:var(--w40); text-transform:uppercase; letter-spacing:.7px; margin-bottom:8px; }
+
+/* таблица */
+.mini-table { background:var(--bg3); border:1px solid var(--border); border-radius:9px; padding:9px 11px; }
+.mt-head, .mt-row { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:4px; font-size:9.5px; padding:3px 0; }
+.mt-head { color:var(--w40); text-transform:uppercase; letter-spacing:.6px; border-bottom:1px solid var(--border); padding-bottom:5px; margin-bottom:4px; }
+.mt-row { color:var(--w70); border-bottom:1px solid rgba(255,255,255,0.04); }
+.mt-row:last-child { border-bottom:none; }
+.yel { color:var(--y); }
+
+/* ── LOGOS STRIP ── */
+.logos-strip {
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  overflow:hidden; padding:20px 0;
+}
+.ls-label { text-align:center; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--w40); margin-bottom:16px; }
+.ls-track { display:flex; animation:marquee 26s linear infinite; width:max-content; }
+.ls-track:hover { animation-play-state:paused; }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.ls-item {
+  display:flex; align-items:center; gap:7px;
+  padding:0 28px; white-space:nowrap; font-size:13px; font-weight:500;
+  color:var(--w40); border-right:1px solid var(--border);
+  transition:color .15s;
+}
+.ls-item:hover { color:var(--w); }
+
+/* ── УНИВЕРСАЛЬНАЯ СЕКЦИЯ ── */
+.sec { padding:72px 48px; max-width:1280px; margin:0 auto; }
+.sec-full { padding:0; max-width:none; }
+
+.stag { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--y); font-weight:500; margin-bottom:12px; }
+.sh { font-family:'Benzin',sans-serif; font-size:clamp(28px,3vw,42px); font-weight:800; letter-spacing:-1.2px; line-height:1.1; margin-bottom:12px; }
+.ss { font-size:15px; color:var(--w40); line-height:1.7; max-width:520px; }
+
+/* ── PAIN ── */
+.pain-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin-top:40px; }
+.pain-card { background:var(--bg2); padding:32px 28px; transition:background .2s; }
+.pain-card:hover { background:var(--bg3); }
+.pain-n { font-family:'Benzin',sans-serif; font-size:40px; font-weight:800; color:var(--y); opacity:.18; line-height:1; margin-bottom:8px; }
+.pain-t { font-size:17px; font-weight:700; margin-bottom:8px; letter-spacing:-.4px; font-family:'Benzin',sans-serif; }
+.pain-b { font-size:13px; color:var(--w40); line-height:1.7; }
+
+/* ── SERVICES ── */
+.srv-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:40px; }
+.srv-card {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:14px; padding:28px; transition:border-color .2s, transform .2s; position:relative; overflow:hidden;
+}
+.srv-card::after { content:''; position:absolute; top:0; left:0; right:0; height:1.5px; background:linear-gradient(90deg,transparent,var(--y),transparent); opacity:0; transition:opacity .3s; }
+.srv-card:hover { border-color:rgba(240,216,0,.25); transform:translateY(-3px); }
+.srv-card:hover::after { opacity:1; }
+.srv-ico { font-size:24px; margin-bottom:16px; }
+.srv-t { font-size:18px; font-weight:700; letter-spacing:-.3px; margin-bottom:8px; font-family:'Benzin',sans-serif; }
+.srv-d { font-size:13px; color:var(--w40); line-height:1.7; margin-bottom:18px; }
+.tags { display:flex; flex-wrap:wrap; gap:5px; }
+.tag { font-size:10px; color:var(--y); background:var(--y-dim); border-radius:5px; padding:2px 9px; font-weight:500; }
+
+/* ── STATS ── */
+.stats-band {
+  background:var(--bg2);
+  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  padding:52px 48px;
+}
+.stats-inner { max-width:1280px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:32px; }
+.stat { text-align:center; }
+.stat-n { font-family:'Benzin',sans-serif; font-size:48px; font-weight:800; color:var(--y); line-height:1; }
+.stat-l { font-size:13px; color:var(--w40); margin-top:6px; }
+
+/* ── HOW IT WORKS ── */
+.how-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:40px; }
+.how-card { background:var(--bg2); border:1px solid var(--border); border-radius:14px; padding:28px; }
+.how-num { font-family:'Benzin',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; color:var(--y); text-transform:uppercase; margin-bottom:14px; }
+.how-t { font-size:18px; font-weight:700; margin-bottom:8px; letter-spacing:-.3px; font-family:'Benzin',sans-serif; }
+.how-d { font-size:13px; color:var(--w40); line-height:1.7; }
+
+/* ── TOOLS ── */
+.tools-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:36px; }
+.tool-card {
+  background:var(--bg2); border:1px solid var(--border); border-radius:10px;
+  padding:16px 18px; display:flex; align-items:center; gap:12px;
+  transition:border-color .2s;
+}
+.tool-card:hover { border-color:rgba(240,216,0,.2); }
+.t-ico { font-size:20px; }
+.t-name { font-size:13px; font-weight:500; }
+.t-type { font-size:11px; color:var(--w40); margin-top:2px; }
+
+/* ── CALC ── */
+.calc-outer { background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:72px 48px; }
+.calc-inner { max-width:840px; margin:0 auto; }
+.calc-box { background:var(--bg3); border:1px solid var(--border); border-radius:16px; padding:36px; margin-top:36px; }
+
+.calc-srv { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:28px; }
+.ci {
+  display:flex; align-items:center; gap:10px;
+  padding:12px 14px; border-radius:9px; cursor:pointer;
+  border:1px solid var(--border); background:var(--bg2); transition:all .15s;
+}
+.ci.on { border-color:rgba(240,216,0,.35); background:rgba(240,216,0,.06); }
+.ci-chk { width:18px; height:18px; border-radius:4px; border:1.5px solid var(--border); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:10px; transition:all .15s; }
+.ci.on .ci-chk { background:var(--y); border-color:var(--y); color:#000; }
+.ci-name { font-size:13px; font-weight:500; }
+.ci-price { font-size:11px; color:var(--w40); margin-top:1px; }
+
+.clabel { font-size:11px; font-weight:500; color:var(--w40); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; }
+.spend-row { display:flex; gap:7px; flex-wrap:wrap; margin-bottom:24px; }
+.sb { padding:8px 16px; border-radius:7px; border:1px solid var(--border); background:var(--bg2); color:var(--w40); font-family:'Montserrat',sans-serif; font-size:12px; cursor:pointer; transition:all .15s; }
+.sb.on { border-color:rgba(240,216,0,.35); background:rgba(240,216,0,.07); color:var(--y); }
+
+.calc-result { background:var(--bg); border:1px solid rgba(240,216,0,.2); border-radius:12px; padding:24px 28px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.res-label { font-size:11px; color:var(--w40); margin-bottom:5px; }
+.res-price { font-family:'Benzin',sans-serif; font-size:34px; font-weight:800; color:var(--y); line-height:1; }
+.res-sub { font-size:11px; color:var(--w40); margin-top:4px; }
+.res-btn { background:var(--y); color:#000; border:none; border-radius:8px; padding:13px 24px; font-family:'Montserrat',sans-serif; font-size:13px; font-weight:500; cursor:pointer; white-space:nowrap; transition:opacity .2s; }
+.res-btn:hover { opacity:.85; }
+
+/* ── TESTIMONIALS ── */
+.testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:40px; }
+.tcard { background:var(--bg2); border:1px solid var(--border); border-radius:14px; padding:24px; }
+.tstars { font-size:12px; color:var(--y); letter-spacing:2px; margin-bottom:12px; }
+.ttext { font-size:13px; line-height:1.75; color:var(--w40); margin-bottom:18px; }
+.ttext strong { color:var(--w70); }
+.tauthor { display:flex; align-items:center; gap:10px; }
+.tavatar { width:34px; height:34px; border-radius:50%; background:var(--bg4); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:14px; }
+.tname { font-size:13px; font-weight:500; }
+.trole { font-size:11px; color:var(--w40); }
+
+/* ── FORM ── */
+.form-outer { background:var(--bg2); border-top:1px solid var(--border); padding:80px 48px; }
+.form-inner-w { max-width:560px; margin:0 auto; text-align:center; }
+.form-badge { display:inline-block; background:var(--y-dim); color:var(--y); border:1px solid rgba(240,216,0,.2); border-radius:100px; font-size:11px; letter-spacing:1px; text-transform:uppercase; font-weight:500; padding:4px 16px; margin-bottom:20px; }
+.form-outer h2 { font-family:'Benzin',sans-serif; font-size:clamp(28px,3.5vw,44px); font-weight:800; letter-spacing:-1.5px; margin-bottom:10px; line-height:1.1; }
+.form-outer p { font-size:15px; color:var(--w40); margin-bottom:36px; line-height:1.65; }
+
+.lf { display:flex; flex-direction:column; gap:10px; text-align:left; }
+.fg { display:flex; flex-direction:column; gap:5px; }
+.fg2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.fl { font-size:11px; font-weight:500; color:var(--w40); text-transform:uppercase; letter-spacing:.8px; }
+.fi {
+  background:var(--bg3); border:1px solid var(--border); border-radius:9px;
+  padding:12px 14px; font-family:'Montserrat',sans-serif; font-size:14px;
+  color:var(--w); outline:none; transition:border-color .15s;
+}
+.fi::placeholder { color:var(--w40); }
+.fi:focus { border-color:rgba(240,216,0,.4); }
+.fi-sel { appearance:none; cursor:pointer; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' fill='none'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='rgba(255,255,255,0.3)' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; }
+.fi-ta { min-height:88px; resize:none; }
+.sub-btn { background:var(--y); color:#000; border:none; border-radius:9px; padding:14px; font-family:'Montserrat',sans-serif; font-size:15px; font-weight:500; cursor:pointer; transition:opacity .2s; margin-top:4px; }
+.sub-btn:hover { opacity:.88; }
+.fnote { font-size:11px; color:var(--w40); text-align:center; margin-top:6px; }
+
+/* ── FOOTER ── */
+footer { background:var(--bg); border-top:1px solid var(--border); padding:52px 48px 36px; }
+.ft-inner { max-width:1280px; margin:0 auto; }
+.ft-top { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; margin-bottom:40px; }
+.ft-logo { font-family:'Russo One', sans-serif; font-size:18px; font-weight:400; margin-bottom:10px; text-transform:uppercase; letter-spacing:0.5px; }
+.ft-logo .x { color:var(--y); }
+.ft-desc { font-size:13px; color:var(--w40); line-height:1.65; max-width:200px; }
+.ft-ct { font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:1px; color:var(--w40); margin-bottom:14px; }
+.ft-links { display:flex; flex-direction:column; gap:8px; }
+.ft-link { font-size:13px; color:var(--w40); cursor:pointer; background:none; border:none; text-align:left; transition:color .15s; font-family:'Montserrat',sans-serif; }
+.ft-link:hover { color:var(--w); }
+.ft-bottom { border-top:1px solid var(--border); padding-top:20px; display:flex; justify-content:space-between; }
+.ft-copy { font-size:11px; color:var(--w40); }
+.yel { color:var(--y); }
+
+/* ── TOAST ── */
+.toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(70px); background:var(--y); color:#000; padding:11px 24px; border-radius:100px; font-size:13px; font-weight:500; opacity:0; transition:all .3s; z-index:999; white-space:nowrap; }
+.toast.on { transform:translateX(-50%) translateY(0); opacity:1; }
+
+/* ── SCROLL ANCHOR FIX — кнопка не залезает на секцию ── */
+#services, #how, #pricing, #contact { scroll-margin-top:72px; }
+
+/* ── FADE IN ── */
+.fi-anim { opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease; }
+.fi-anim.vis { opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo"><span class="x">X</span>-ray<span class="dot"> ·</span></div>
+  <div class="nav-links">
+    <button class="nav-link" onclick="goTo('#services')">Services</button>
+    <button class="nav-link" onclick="goTo('#how')">How It Works</button>
+    <button class="nav-link" onclick="goTo('#pricing')">Pricing</button>
+    <button class="nav-link" onclick="goTo('#contact')">Contact</button>
+  </div>
+  <button class="nav-cta" onclick="goTo('#contact');dl('hero_nav_cta')">Get Free Audit →</button>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero-wrap">
+  <!-- LEFT -->
+  <div>
+    <div class="hero-badge"><span class="badge-dot"></span>Available for new projects · 2026</div>
+    <h1>Your Ads Waste<br><em>30% of Budget</em><br>on Broken Data.</h1>
+    <p class="hero-sub">We build end-to-end analytics infrastructure that recovers lost conversions and <strong>doubles your marketing ROI within 90 days</strong> — or we keep working until it does.</p>
+    <div class="hero-btns">
+      <button class="btn-y" onclick="goTo('#contact');dl('hero_primary')">Get Free Audit →</button>
+      <button class="btn-ghost" onclick="goTo('#how');dl('hero_secondary')">How It Works</button>
+    </div>
+    <div class="hero-trust">
+      <span>✓ GA4 + GTM certified</span>
+      <span class="tsep"></span>
+      <span>✓ 48h response</span>
+      <span class="tsep"></span>
+      <span>✓ Results in 90 days</span>
+    </div>
+  </div>
+
+  <!-- RIGHT — DASHBOARD -->
+  <div class="dash-frame">
+    <div class="scan-line"></div>
+    <div class="topbar">
+      <span class="tdot" style="background:#ff5f57"></span>
+      <span class="tdot" style="background:#febc2e"></span>
+      <span class="tdot" style="background:#28c840"></span>
+      <span class="tbar-title">X-ray Analytics · Revenue Overview</span>
+    </div>
+    <div class="dash-body">
+      <div class="metrics">
+        <div class="mc"><div class="ml">Revenue</div><div class="mv" style="color:var(--y)">$284K</div><div class="md up">↑ 43%</div></div>
+        <div class="mc"><div class="ml">ROAS</div><div class="mv">4.8×</div><div class="md up">↑ 2.1×</div></div>
+        <div class="mc"><div class="ml">Conv. Rate</div><div class="mv">3.7%</div><div class="md up">↑ 1.4%</div></div>
+        <div class="mc"><div class="ml">Lost Events</div><div class="mv" style="color:var(--red)">0</div><div class="md up">↓ 98%</div></div>
+      </div>
+      <div class="charts">
+        <div class="cc">
+          <div class="cl">Revenue vs Ad Spend — 30 Days</div>
+          <svg viewBox="0 0 300 90" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="yg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#f0d800" stop-opacity="0.28"/>
+                <stop offset="100%" stop-color="#f0d800" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <line x1="0" y1="22" x2="300" y2="22" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <line x1="0" y1="46" x2="300" y2="46" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <line x1="0" y1="70" x2="300" y2="70" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <path d="M0,78 L20,70 L40,62 L60,55 L80,47 L100,41 L120,35 L140,30 L160,26 L180,21 L200,17 L220,13 L240,9 L260,7 L280,5 L300,3 L300,90 L0,90Z" fill="url(#yg)"/>
+            <path d="M0,78 L20,70 L40,62 L60,55 L80,47 L100,41 L120,35 L140,30 L160,26 L180,21 L200,17 L220,13 L240,9 L260,7 L280,5 L300,3" fill="none" stroke="#f0d800" stroke-width="1.8"/>
+            <path d="M0,82 L20,78 L40,76 L60,74 L80,72 L100,70 L120,68 L140,65 L160,63 L180,60 L200,58 L220,55 L240,53 L260,51 L280,49 L300,47" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" stroke-dasharray="3,3"/>
+            <circle cx="300" cy="3" r="3" fill="#f0d800"/>
+          </svg>
+          <div style="display:flex;gap:14px;margin-top:6px">
+            <span style="font-size:9px;color:var(--y)">● Revenue</span>
+            <span style="font-size:9px;color:rgba(255,255,255,0.3)">● Ad Spend</span>
+          </div>
+        </div>
+        <div class="cc">
+          <div class="cl">Traffic Sources</div>
+          <svg viewBox="0 0 160 90" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="55" cy="46" r="34" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="12"/>
+            <circle cx="55" cy="46" r="34" fill="none" stroke="#f0d800" stroke-width="12" stroke-dasharray="127 86" stroke-dashoffset="0" stroke-linecap="butt"/>
+            <circle cx="55" cy="46" r="34" fill="none" stroke="#7b61ff" stroke-width="12" stroke-dasharray="53 160" stroke-dashoffset="-127" stroke-linecap="butt"/>
+            <circle cx="55" cy="46" r="34" fill="none" stroke="#ff6b35" stroke-width="12" stroke-dasharray="33 180" stroke-dashoffset="-180" stroke-linecap="butt"/>
+            <text x="55" y="43" fill="white" font-size="13" font-weight="700" text-anchor="middle" font-family="Syne,sans-serif">60%</text>
+            <text x="55" y="55" fill="rgba(255,255,255,0.35)" font-size="7" text-anchor="middle">Paid</text>
+            <rect x="98" y="18" width="6" height="6" rx="1" fill="#f0d800"/><text x="108" y="25" fill="rgba(255,255,255,0.45)" font-size="8">Paid Search</text>
+            <rect x="98" y="33" width="6" height="6" rx="1" fill="#7b61ff"/><text x="108" y="40" fill="rgba(255,255,255,0.45)" font-size="8">Organic</text>
+            <rect x="98" y="48" width="6" height="6" rx="1" fill="#ff6b35"/><text x="108" y="55" fill="rgba(255,255,255,0.45)" font-size="8">Social</text>
+          </svg>
+        </div>
+      </div>
+      <div class="mini-table">
+        <div class="mt-head"><span>Campaign</span><span>Spend</span><span>Revenue</span><span>ROAS</span></div>
+        <div class="mt-row"><span>Brand — Search</span><span>$4.2K</span><span>$28K</span><span class="yel">6.7×</span></div>
+        <div class="mt-row"><span>Retargeting</span><span>$6.8K</span><span>$31K</span><span class="yel">4.5×</span></div>
+        <div class="mt-row"><span>Meta — Prospecting</span><span>$9.1K</span><span>$22K</span><span class="yel">2.4×</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LOGOS ═══ -->
+<div class="logos-strip fi-anim">
+  <div class="ls-label">Tools we implement & configure</div>
+  <div class="ls-track">
+    <div class="ls-item">📊 Google Analytics 4</div>
+    <div class="ls-item">🏷️ Google Tag Manager</div>
+    <div class="ls-item">📈 Looker Studio</div>
+    <div class="ls-item">🗄️ BigQuery</div>
+    <div class="ls-item">🎯 Meta CAPI</div>
+    <div class="ls-item">⚙️ Server-Side GTM</div>
+    <div class="ls-item">🔌 Supermetrics</div>
+    <div class="ls-item">⚡ Make.com</div>
+    <div class="ls-item">🔒 Consent Mode v2</div>
+    <div class="ls-item">🛒 Google Ads</div>
+    <div class="ls-item">📊 Google Analytics 4</div>
+    <div class="ls-item">🏷️ Google Tag Manager</div>
+    <div class="ls-item">📈 Looker Studio</div>
+    <div class="ls-item">🗄️ BigQuery</div>
+    <div class="ls-item">🎯 Meta CAPI</div>
+    <div class="ls-item">⚙️ Server-Side GTM</div>
+    <div class="ls-item">🔌 Supermetrics</div>
+    <div class="ls-item">⚡ Make.com</div>
+    <div class="ls-item">🔒 Consent Mode v2</div>
+    <div class="ls-item">🛒 Google Ads</div>
+  </div>
+</div>
+
+<!-- ═══ PAIN ═══ -->
+<div class="sec fi-anim">
+  <div class="stag">The Problem</div>
+  <h2 class="sh">Most businesses run ads<br>on fundamentally broken data.</h2>
+  <div class="pain-grid">
+    <div class="pain-card"><div class="pain-n">01</div><div class="pain-t">You're blind to 40% of conversions</div><div class="pain-b">iOS 14.5+, ad blockers, and cookie restrictions hide a huge chunk of real sales. You're optimizing campaigns on ghost data.</div></div>
+    <div class="pain-card"><div class="pain-n">02</div><div class="pain-t">Your GA4 events are broken</div><div class="pain-b">87% of GA4 setups we audit have critical data loss — duplicate events, missed form submissions, broken checkout funnels.</div></div>
+    <div class="pain-card"><div class="pain-n">03</div><div class="pain-t">No single source of truth</div><div class="pain-b">Meta says 120 sales. Google says 90. CRM shows 60. Nobody knows which is real — so decisions are made on gut, not data.</div></div>
+  </div>
+</div>
+
+<!-- ═══ SERVICES ═══ -->
+<div class="sec fi-anim" id="services">
+  <div class="stag">What We Do</div>
+  <h2 class="sh">Full-stack analytics,<br>implemented end-to-end.</h2>
+  <p class="ss">We don't just configure tags. We build the complete data infrastructure your business needs to make confident, profitable decisions.</p>
+  <div class="srv-grid">
+    <div class="srv-card">
+      <div class="srv-ico">🔬</div>
+      <div class="srv-t">Analytics Audit & Setup</div>
+      <div class="srv-d">Complete audit of your tracking. We find every data leak, broken event, and misconfiguration — then rebuild your GA4 + GTM stack from scratch.</div>
+      <div class="tags"><span class="tag">GA4</span><span class="tag">GTM</span><span class="tag">DataLayer</span><span class="tag">Consent Mode v2</span></div>
+    </div>
+    <div class="srv-card">
+      <div class="srv-ico">📡</div>
+      <div class="srv-t">Server-Side & CAPI</div>
+      <div class="srv-d">Bypass ad blockers and iOS restrictions with server-side tagging and Meta CAPI. Recover 30–60% of lost conversion data. Better ROAS on the same budget.</div>
+      <div class="tags"><span class="tag">sGTM</span><span class="tag">Meta CAPI</span><span class="tag">Enhanced Conversions</span></div>
+    </div>
+    <div class="srv-card">
+      <div class="srv-ico">📊</div>
+      <div class="srv-t">Dashboards & Reporting</div>
+      <div class="srv-d">Automated Looker Studio dashboards connected to GA4, Meta Ads, Google Ads, and your CRM. One truth. No more spreadsheet hell.</div>
+      <div class="tags"><span class="tag">Looker Studio</span><span class="tag">BigQuery</span><span class="tag">Supermetrics</span><span class="tag">Make.com</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STATS ═══ -->
+<div class="stats-band fi-anim">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-n" data-target="43">0</div><div class="stat-l">Average ROAS improvement, %</div></div>
+    <div class="stat"><div class="stat-n" data-target="90">0</div><div class="stat-l">Days to measurable results</div></div>
+    <div class="stat"><div class="stat-n" data-target="57">0</div><div class="stat-l">Avg. conversion recovery, %</div></div>
+    <div class="stat"><div class="stat-n" data-target="120">0</div><div class="stat-l">Clients with fixed tracking</div></div>
+  </div>
+</div>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<div class="sec fi-anim" id="how">
+  <div class="stag">Process</div>
+  <h2 class="sh">From broken tracking<br>to full data clarity.</h2>
+  <div class="how-grid">
+    <div class="how-card"><div class="how-num">Step 01</div><div class="how-t">Free Analytics Audit</div><div class="how-d">We audit your full tracking stack in 48 hours. You get a detailed report: every data gap, broken event, and what it's costing you in wasted spend.</div></div>
+    <div class="how-card"><div class="how-num">Step 02</div><div class="how-t">Infrastructure Build</div><div class="how-d">We rebuild GTM, configure GA4, implement server-side tracking and CAPI, connect your CRM, and set up automated data pipelines to BigQuery.</div></div>
+    <div class="how-card"><div class="how-num">Step 03</div><div class="how-t">Dashboard & Handoff</div><div class="how-d">Your team gets live Looker Studio dashboards, full documentation, and a 60-minute training session. Everything is yours — no vendor lock-in.</div></div>
+  </div>
+</div>
+
+<!-- ═══ TOOLS ═══ -->
+<div class="sec fi-anim" style="padding-top:0">
+  <div class="stag">Tech Stack</div>
+  <h2 class="sh">The best tools.<br>Properly configured.</h2>
+  <div class="tools-grid">
+    <div class="tool-card"><span class="t-ico">📊</span><div><div class="t-name">Google Analytics 4</div><div class="t-type">Web analytics</div></div></div>
+    <div class="tool-card"><span class="t-ico">🏷️</span><div><div class="t-name">Google Tag Manager</div><div class="t-type">Tag management</div></div></div>
+    <div class="tool-card"><span class="t-ico">📈</span><div><div class="t-name">Looker Studio</div><div class="t-type">BI dashboards</div></div></div>
+    <div class="tool-card"><span class="t-ico">🗄️</span><div><div class="t-name">BigQuery</div><div class="t-type">Data warehouse</div></div></div>
+    <div class="tool-card"><span class="t-ico">🎯</span><div><div class="t-name">Meta CAPI</div><div class="t-type">Conversions API</div></div></div>
+    <div class="tool-card"><span class="t-ico">⚙️</span><div><div class="t-name">Server-Side GTM</div><div class="t-type">Server tagging</div></div></div>
+    <div class="tool-card"><span class="t-ico">🔌</span><div><div class="t-name">Supermetrics</div><div class="t-type">Data connectors</div></div></div>
+    <div class="tool-card"><span class="t-ico">⚡</span><div><div class="t-name">Make.com</div><div class="t-type">Automation</div></div></div>
+  </div>
+</div>
+
+<!-- ═══ CALCULATOR ═══ -->
+<div class="calc-outer fi-anim" id="pricing">
+  <div class="calc-inner">
+    <div class="stag" style="text-align:center">Pricing Calculator</div>
+    <h2 class="sh" style="text-align:center">Estimate your project cost</h2>
+    <p class="ss" style="margin:0 auto;text-align:center">Select the services you need — price updates instantly.</p>
+    <div class="calc-box">
+      <div class="clabel" style="margin-bottom:12px">1. Choose services</div>
+      <div class="calc-srv" id="calcSrv">
+        <div class="ci on" data-price="590" onclick="tog(this)"><div class="ci-chk">✓</div><div><div class="ci-name">GA4 Full Implementation</div><div class="ci-price">from $590</div></div></div>
+        <div class="ci on" data-price="490" onclick="tog(this)"><div class="ci-chk">✓</div><div><div class="ci-name">GTM Setup & DataLayer</div><div class="ci-price">from $490</div></div></div>
+        <div class="ci" data-price="890" onclick="tog(this)"><div class="ci-chk"></div><div><div class="ci-name">Meta CAPI + Server-Side GTM</div><div class="ci-price">from $890</div></div></div>
+        <div class="ci" data-price="390" onclick="tog(this)"><div class="ci-chk"></div><div><div class="ci-name">Looker Studio Dashboard</div><div class="ci-price">from $390</div></div></div>
+        <div class="ci" data-price="790" onclick="tog(this)"><div class="ci-chk"></div><div><div class="ci-name">BigQuery Data Warehouse</div><div class="ci-price">from $790</div></div></div>
+        <div class="ci" data-price="290" onclick="tog(this)"><div class="ci-chk"></div><div><div class="ci-name">Consent Mode v2 + GDPR</div><div class="ci-price">from $290</div></div></div>
+      </div>
+      <div class="clabel">2. Monthly ad spend</div>
+      <div class="spend-row">
+        <button class="sb on" data-m="1.0" onclick="selS(this)">Under $10K</button>
+        <button class="sb" data-m="1.3" onclick="selS(this)">$10K–$50K</button>
+        <button class="sb" data-m="1.6" onclick="selS(this)">$50K–$200K</button>
+        <button class="sb" data-m="2.0" onclick="selS(this)">$200K+</button>
+      </div>
+      <div class="calc-result">
+        <div>
+          <div class="res-label">Estimated project cost</div>
+          <div class="res-price" id="rPrice">$1,080</div>
+          <div class="res-sub">One-time · Monthly retainer from $<span id="rRet">290</span>/mo</div>
+        </div>
+        <button class="res-btn" onclick="goTo('#contact');dl('calc_cta')">Get Exact Quote →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<div class="sec fi-anim">
+  <div class="stag">Results</div>
+  <h2 class="sh">What clients say after<br>we fix their data.</h2>
+  <div class="testi-grid">
+    <div class="tcard"><div class="tstars">★★★★★</div><div class="ttext">"Before X-ray Analytics, Meta showed 80 purchases. After CAPI — <strong>we recovered 47 hidden conversions</strong>. ROAS went from 2.1× to 4.8× on the same budget."</div><div class="tauthor"><div class="tavatar">🛍️</div><div><div class="tname">Sarah K.</div><div class="trole">Head of Growth · Fashion DTC</div></div></div></div>
+    <div class="tcard"><div class="tstars">★★★★★</div><div class="ttext">"We had 6 reports giving 6 different numbers. X-ray built us BigQuery + Looker. Now <strong>the entire team looks at the same truth</strong>. Decisions take days, not weeks."</div><div class="tauthor"><div class="tavatar">💻</div><div><div class="tname">Michael T.</div><div class="trole">CMO · B2B SaaS, Series A</div></div></div></div>
+    <div class="tcard"><div class="tstars">★★★★★</div><div class="ttext">"The free audit alone was worth it — they found <strong>GA4 was double-counting 40% of revenue</strong>. We were making decisions on completely wrong data. Fixed in 2 weeks."</div><div class="tauthor"><div class="tavatar">📦</div><div><div class="tname">Anna L.</div><div class="trole">Performance Lead · Ecom, $800K/mo</div></div></div></div>
+  </div>
+</div>
+
+<!-- ═══ FORM ═══ -->
+<div class="form-outer fi-anim" id="contact">
+  <div class="form-inner-w">
+    <div class="form-badge">Free audit · No commitment</div>
+    <h2>Stop guessing.<br>Start growing.</h2>
+    <p>Send us your site — we audit your analytics stack for free and show you exactly where money is leaking. 48 hours. Zero obligation.</p>
+    <form class="lf" id="leadForm" onsubmit="sub(event)">
+      <div class="fg2">
+        <div class="fg"><label class="fl">First Name</label><input class="fi" type="text" placeholder="John" required></div>
+        <div class="fg"><label class="fl">Last Name</label><input class="fi" type="text" placeholder="Smith" required></div>
+      </div>
+      <div class="fg"><label class="fl">Work Email</label><input class="fi" type="email" id="lEmail" placeholder="john@company.com" required></div>
+      <div class="fg"><label class="fl">Website URL</label><input class="fi" type="url" id="lUrl" placeholder="https://yourstore.com" required></div>
+      <div class="fg">
+        <label class="fl">Monthly Ad Spend</label>
+        <select class="fi fi-sel" id="lSpend" required>
+          <option value="" disabled selected>Select range...</option>
+          <option>Under $5,000</option>
+          <option>$5,000 – $20,000</option>
+          <option>$20,000 – $100,000</option>
+          <option>$100,000+</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">What's broken? (optional)</label><textarea class="fi fi-ta" placeholder="Broken events, data discrepancies, no reports..."></textarea></div>
+      <button type="submit" class="sub-btn">Request Free Audit →</button>
+      <div class="fnote">✓ We respond within 24h &nbsp;·&nbsp; ✓ Free, no strings attached</div>
+    </form>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div>
+        <div class="ft-logo"><span class="x">X</span>-ray</div>
+        <div class="ft-desc">End-to-end analytics for ecom & SaaS teams serious about growth. GA4 · GTM · CAPI · BigQuery · Looker Studio.</div>
+      </div>
+      <div>
+        <div class="ft-ct">Services</div>
+        <div class="ft-links">
+          <button class="ft-link">GA4 Implementation</button>
+          <button class="ft-link">GTM & DataLayer</button>
+          <button class="ft-link">Meta CAPI</button>
+          <button class="ft-link">Looker Studio</button>
+          <button class="ft-link">BigQuery</button>
+        </div>
+      </div>
+      <div>
+        <div class="ft-ct">Company</div>
+        <div class="ft-links">
+          <button class="ft-link">About</button>
+          <button class="ft-link">Case Studies</button>
+          <button class="ft-link">Blog</button>
+          <button class="ft-link" onclick="goTo('#contact')">Contact</button>
+        </div>
+      </div>
+      <div>
+        <div class="ft-ct">Legal</div>
+        <div class="ft-links">
+          <button class="ft-link">Privacy Policy</button>
+          <button class="ft-link">Terms of Service</button>
+          <button class="ft-link">Cookie Policy</button>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <div class="ft-copy">© 2026 X-ray Analytics. All rights reserved.</div>
+      <div class="ft-copy">Built for data-driven teams <span class="yel">·</span> xray.analytics</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+/* навигация */
+function goTo(sel) {
+  const el = document.querySelector(sel);
+  if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+/* ── CALC ── */
+let mult = 1.0;
+function tog(el) {
+  el.classList.toggle('on');
+  el.querySelector('.ci-chk').textContent = el.classList.contains('on') ? '✓' : '';
+  updCalc();
+  dl('calc_change');
+}
+function selS(btn) {
+  document.querySelectorAll('.sb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on'); mult = parseFloat(btn.dataset.m); updCalc();
+}
+function updCalc() {
+  const base = [...document.querySelectorAll('.ci.on')].reduce((s,e)=>s+parseInt(e.dataset.price),0);
+  const total = Math.round(base * mult / 10) * 10;
+  const ret   = Math.round(total * 0.22 / 10) * 10;
+  document.getElementById('rPrice').textContent = '$' + total.toLocaleString();
+  document.getElementById('rRet').textContent   = ret.toLocaleString();
+}
+
+/* ── LEAD FORM ── */
+function sub(e) {
+  e.preventDefault();
+  dataLayer.push({ event:'lead_form_submit', form_type:'audit', spend: document.getElementById('lSpend').value });
+  e.target.reset();
+  showToast('✓ Request sent! We\'ll be in touch within 24 hours.');
+}
+
+/* ── DL EVENTS ── */
+function dl(id) { dataLayer.push({ event:'cta_click', button_id:id }); }
+
+/* ── TOAST ── */
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('on');
+  setTimeout(()=>t.classList.remove('on'), 4000);
+}
+
+/* ── SCROLL FADE IN ── */
+const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); }), { threshold:0.1 });
+document.querySelectorAll('.fi-anim').forEach(el => obs.observe(el));
+
+/* ── COUNTERS ── */
+function runCounter(el) {
+  const t = parseInt(el.dataset.target);
+  let c = 0; const step = t / 80;
+  const tm = setInterval(()=>{
+    c = Math.min(c+step, t);
+    el.textContent = Math.floor(c) + (t >= 100 ? '+' : '%');
+    if(c >= t) clearInterval(tm);
+  }, 18);
+}
+new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.querySelectorAll('[data-target]').forEach(runCounter); } }), {threshold:0.5})
+  .observe(document.querySelector('.stats-band'));
+
+updCalc();
+dataLayer.push({ event:'page_view', page:'xray_landing' });
+</script>
+</body>
+</html>

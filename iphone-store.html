@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top Shop — iPhone 17</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --bg2: #f5f5f7;
+  --bg3: #e8e8ed;
+  --text: #1d1d1f;
+  --text2: #6e6e73;
+  --text3: #aeaeb2;
+  --accent: #0071e3;
+  --accent-hover: #0077ed;
+  --green: #1d8348;
+  --border: rgba(0,0,0,0.08);
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
+  --radius: 18px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 52px;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-size: 18px; font-weight: 600; letter-spacing: -0.3px; color: var(--text); cursor: pointer; }
+.nav-links { display: flex; gap: 28px; }
+.nav-link { font-size: 13px; color: var(--text2); cursor: pointer; transition: color 0.15s; }
+.nav-link:hover { color: var(--text); }
+.nav-cart { display: flex; align-items: center; gap: 6px; background: var(--accent); color: white; padding: 7px 16px; border-radius: 100px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; transition: background 0.15s; }
+.nav-cart:hover { background: var(--accent-hover); }
+.cart-badge { background: white; color: var(--accent); width: 18px; height: 18px; border-radius: 50%; font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+
+/* ── PAGES ── */
+.page { display: none; padding-top: 52px; }
+.page.active { display: block; }
+
+/* ── HERO ── */
+.hero { background: var(--bg2); padding: 80px 40px 60px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; min-height: 580px; }
+.hero-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.hero-title { font-size: clamp(44px, 6vw, 72px); font-weight: 700; line-height: 1.05; letter-spacing: -2px; margin-bottom: 16px; }
+.hero-sub { font-size: 17px; color: var(--text2); line-height: 1.6; max-width: 420px; margin-bottom: 36px; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-blue { background: var(--accent); color: white; padding: 13px 28px; border-radius: 100px; font-size: 14px; font-weight: 500; border: none; cursor: pointer; transition: background 0.15s; }
+.btn-blue:hover { background: var(--accent-hover); }
+.btn-ghost { background: transparent; color: var(--accent); padding: 13px 28px; border-radius: 100px; font-size: 14px; font-weight: 500; border: 1.5px solid var(--accent); cursor: pointer; transition: all 0.15s; }
+.btn-ghost:hover { background: var(--accent); color: white; }
+.hero-phones { display: flex; align-items: flex-end; justify-content: center; gap: 20px; padding-bottom: 20px; }
+.iphone-wrap { position: relative; }
+.iphone-wrap.large { width: 160px; }
+.iphone-wrap.medium { width: 130px; margin-bottom: 20px; }
+.iphone-wrap.small { width: 110px; margin-bottom: 40px; }
+
+/* ── CATALOG ── */
+.section { padding: 60px 40px; }
+.section-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 36px; }
+.section-title { font-size: 36px; font-weight: 700; letter-spacing: -1px; }
+.section-sub { font-size: 14px; color: var(--text2); }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+.card { background: var(--bg2); border-radius: var(--radius); overflow: hidden; cursor: pointer; transition: transform 0.25s, box-shadow 0.25s; border: 1px solid var(--border); }
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+
+/* карточка — увеличена высота, телефон по центру полностью */
+.card-img {
+  height: 280px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  background: linear-gradient(160deg, #f0f0f5, #e8e8ef);
+  padding: 16px 0 8px;
+}
+.card-tag { position: absolute; top: 14px; left: 14px; background: var(--text); color: white; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; }
+.card-body { padding: 20px; }
+.card-model { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.card-name { font-size: 17px; font-weight: 600; margin-bottom: 2px; }
+.card-color { font-size: 13px; color: var(--text2); margin-bottom: 16px; }
+.card-footer { display: flex; flex-direction: column; gap: 12px; }
+.card-price { font-size: 20px; font-weight: 600; }
+.card-add { width: 100%; background: var(--accent); color: white; border: none; border-radius: 10px; padding: 11px; font-size: 14px; font-weight: 500; cursor: pointer; transition: background 0.15s; }
+.card-add:hover { background: var(--accent-hover); }
+
+/* ── PRODUCT PAGE ── */
+.product-wrap { padding: 40px 40px 60px; }
+.back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--accent); cursor: pointer; background: none; border: none; margin-bottom: 40px; transition: opacity 0.15s; }
+.back-link:hover { opacity: 0.7; }
+.product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.product-visual { position: sticky; top: 80px; background: var(--bg2); border-radius: 24px; height: 560px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); }
+.product-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.product-name { font-size: 48px; font-weight: 700; letter-spacing: -1.5px; line-height: 1; margin-bottom: 6px; }
+.product-variant { font-size: 20px; color: var(--text2); margin-bottom: 28px; }
+.product-price { font-size: 36px; font-weight: 600; margin-bottom: 28px; }
+.specs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+.spec { background: var(--bg2); border-radius: 12px; padding: 14px 16px; }
+.spec-key { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+.spec-val { font-size: 15px; font-weight: 500; }
+.storage-label { font-size: 13px; font-weight: 500; margin-bottom: 10px; }
+.storage-row { display: flex; gap: 8px; margin-bottom: 24px; }
+.s-btn { border: 1.5px solid var(--border); background: white; border-radius: 10px; padding: 9px 18px; font-size: 14px; cursor: pointer; transition: all 0.15s; }
+.s-btn.on { border-color: var(--accent); color: var(--accent); background: #e8f0fd; }
+.atc { width: 100%; background: var(--accent); color: white; border: none; border-radius: 14px; padding: 17px; font-size: 16px; font-weight: 500; cursor: pointer; transition: background 0.15s; margin-bottom: 10px; }
+.atc:hover { background: var(--accent-hover); }
+.wish { width: 100%; background: transparent; color: var(--accent); border: 1.5px solid var(--accent); border-radius: 14px; padding: 17px; font-size: 16px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+.wish:hover { background: #e8f0fd; }
+
+/* ── CART ── */
+.cart-wrap { max-width: 860px; margin: 0 auto; padding: 40px 40px 60px; }
+.cart-h1 { font-size: 40px; font-weight: 700; letter-spacing: -1px; margin-bottom: 32px; }
+.empty-cart { text-align: center; padding: 80px 0; color: var(--text2); }
+.empty-icon { font-size: 56px; margin-bottom: 16px; }
+.empty-txt { font-size: 20px; margin-bottom: 24px; }
+.c-item { display: grid; grid-template-columns: 90px 1fr auto; gap: 20px; align-items: center; padding: 24px 0; border-bottom: 1px solid var(--border); }
+.c-thumb { width: 90px; height: 90px; background: var(--bg2); border-radius: 14px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); }
+.c-name { font-size: 16px; font-weight: 600; margin-bottom: 3px; }
+.c-sub { font-size: 13px; color: var(--text2); margin-bottom: 12px; }
+.qty-row { display: flex; align-items: center; gap: 14px; }
+.qty-b { width: 30px; height: 30px; border: 1.5px solid var(--border); border-radius: 8px; background: none; cursor: pointer; font-size: 16px; transition: border-color 0.15s; display: flex; align-items: center; justify-content: center; }
+.qty-b:hover { border-color: var(--accent); color: var(--accent); }
+.qty-n { font-size: 15px; font-weight: 500; }
+.c-price { font-size: 20px; font-weight: 600; text-align: right; }
+.c-rm { display: block; font-size: 12px; color: var(--text3); cursor: pointer; text-align: right; margin-top: 6px; background: none; border: none; transition: color 0.15s; }
+.c-rm:hover { color: #e30000; }
+.summary-box { background: var(--bg2); border-radius: 18px; padding: 28px; margin-top: 32px; border: 1px solid var(--border); }
+.s-row { display: flex; justify-content: space-between; font-size: 15px; padding: 8px 0; }
+.s-row.bold { font-size: 18px; font-weight: 600; border-top: 1px solid var(--border); margin-top: 8px; padding-top: 16px; }
+.ch-btn { width: 100%; margin-top: 20px; background: var(--accent); color: white; border: none; border-radius: 14px; padding: 17px; font-size: 16px; font-weight: 500; cursor: pointer; transition: background 0.15s; }
+.ch-btn:hover { background: var(--accent-hover); }
+
+/* ── CHECKOUT ── */
+.checkout-wrap { max-width: 780px; margin: 0 auto; padding: 40px 40px 60px; }
+.checkout-h1 { font-size: 40px; font-weight: 700; letter-spacing: -1px; margin-bottom: 28px; }
+.order-mini { background: var(--bg2); border-radius: 14px; padding: 20px 24px; margin-bottom: 28px; border: 1px solid var(--border); }
+.om-title { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); margin-bottom: 12px; font-weight: 600; }
+.om-row { display: flex; justify-content: space-between; font-size: 14px; padding: 4px 0; }
+.om-total { display: flex; justify-content: space-between; font-size: 16px; font-weight: 600; border-top: 1px solid var(--border); margin-top: 10px; padding-top: 12px; }
+.form { display: flex; flex-direction: column; gap: 14px; }
+.form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.fg { display: flex; flex-direction: column; gap: 6px; }
+.fl { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text2); }
+.fi { background: var(--bg2); border: 1.5px solid var(--border); border-radius: 12px; padding: 13px 16px; font-size: 15px; font-family: inherit; color: var(--text); outline: none; transition: border-color 0.15s; }
+.fi:focus { border-color: var(--accent); background: white; }
+.po-btn { width: 100%; margin-top: 8px; background: var(--accent); color: white; border: none; border-radius: 14px; padding: 17px; font-size: 16px; font-weight: 500; cursor: pointer; transition: background 0.15s; }
+.po-btn:hover { background: var(--accent-hover); }
+
+/* ── THANK YOU ── */
+.ty-wrap { min-height: calc(100vh - 52px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px; }
+.ty-circle { width: 80px; height: 80px; border-radius: 50%; background: #e3f5e8; display: flex; align-items: center; justify-content: center; font-size: 36px; margin-bottom: 28px; }
+.ty-h1 { font-size: 52px; font-weight: 700; letter-spacing: -1.5px; margin-bottom: 12px; }
+.ty-p { font-size: 17px; color: var(--text2); line-height: 1.6; max-width: 380px; margin-bottom: 8px; }
+.ty-order { font-size: 13px; color: var(--text3); margin-bottom: 36px; }
+
+/* ── LEAD FORM SECTION ── */
+.lead-section { background: linear-gradient(135deg, #1d1d1f 0%, #2d2d2f 100%); padding: 80px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.lead-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.lead-title { font-size: 42px; font-weight: 700; letter-spacing: -1px; color: white; line-height: 1.1; margin-bottom: 14px; }
+.lead-sub { font-size: 16px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+.lead-form-box { background: white; border-radius: 24px; padding: 36px; box-shadow: var(--shadow-lg); }
+.lf-title { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+.lf-sub { font-size: 14px; color: var(--text2); margin-bottom: 24px; }
+.lf-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+.lf-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text2); }
+.lf-input { border: 1.5px solid var(--border); border-radius: 12px; padding: 13px 16px; font-size: 15px; font-family: inherit; color: var(--text); outline: none; transition: border-color 0.15s; background: var(--bg2); }
+.lf-input:focus { border-color: var(--accent); background: white; }
+.lf-btn { width: 100%; background: var(--accent); color: white; border: none; border-radius: 12px; padding: 15px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.15s; margin-top: 6px; }
+.lf-btn:hover { background: var(--accent-hover); }
+
+/* ── FOOTER ── */
+footer { background: #1d1d1f; padding: 60px 40px 40px; color: rgba(255,255,255,0.6); }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+.footer-logo { font-size: 22px; font-weight: 700; color: white; margin-bottom: 12px; }
+.footer-tagline { font-size: 14px; line-height: 1.6; max-width: 240px; }
+.footer-col-title { font-size: 13px; font-weight: 600; color: white; margin-bottom: 16px; letter-spacing: 0.3px; }
+.footer-links { display: flex; flex-direction: column; gap: 10px; }
+.footer-link { font-size: 13px; cursor: pointer; transition: color 0.15s; }
+.footer-link:hover { color: white; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+.footer-copy { font-size: 12px; }
+.footer-legal { display: flex; gap: 24px; }
+.footer-legal span { font-size: 12px; cursor: pointer; }
+.footer-legal span:hover { color: white; }
+
+/* ── TOAST (уведомление о добавлении в корзину) ── */
+.toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--text); color: white; padding: 12px 24px; border-radius: 100px; font-size: 14px; font-weight: 500; opacity: 0; transition: all 0.3s; z-index: 999; white-space: nowrap; }
+.toast.on { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+/* ── SUPPORT MODAL ── */
+.modal-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  align-items: center; justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+
+.support-modal {
+  background: white;
+  border-radius: 24px;
+  padding: 40px;
+  width: 520px;
+  max-width: calc(100vw - 40px);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.25);
+  position: relative;
+  animation: modalIn 0.25s ease;
+}
+
+@keyframes modalIn {
+  from { transform: scale(0.94) translateY(12px); opacity: 0; }
+  to   { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.modal-close {
+  position: absolute; top: 20px; right: 20px;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--bg2); border: none; cursor: pointer;
+  font-size: 16px; display: flex; align-items: center; justify-content: center;
+  color: var(--text2); transition: background 0.15s;
+}
+.modal-close:hover { background: var(--bg3); }
+
+.modal-badge {
+  width: 52px; height: 52px; border-radius: 14px;
+  background: linear-gradient(135deg, #0071e3, #34aadc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin-bottom: 20px;
+}
+
+.modal-title { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 4px; }
+.modal-sub { font-size: 14px; color: var(--text2); margin-bottom: 28px; }
+
+.support-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.stag { border: 1.5px solid var(--border); border-radius: 100px; padding: 6px 14px; font-size: 13px; cursor: pointer; color: var(--text2); background: white; transition: all 0.15s; }
+.stag.on { border-color: var(--accent); color: var(--accent); background: #e8f0fd; }
+
+.sg { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.sl { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text2); }
+.si { border: 1.5px solid var(--border); border-radius: 12px; padding: 12px 16px; font-size: 15px; font-family: inherit; color: var(--text); outline: none; transition: border-color 0.15s; background: var(--bg2); }
+.si:focus { border-color: var(--accent); background: white; }
+.si.textarea { min-height: 110px; resize: none; }
+
+.support-footer { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+.support-submit { flex: 1; background: var(--accent); color: white; border: none; border-radius: 12px; padding: 14px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+.support-submit:hover { background: var(--accent-hover); }
+.support-cancel { background: var(--bg2); color: var(--text2); border: none; border-radius: 12px; padding: 14px 20px; font-size: 15px; cursor: pointer; transition: background 0.15s; }
+.support-cancel:hover { background: var(--bg3); }
+
+/* ── LEAD SUCCESS MODAL (всплывает по центру) ── */
+.lead-success-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 600;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
+  align-items: center; justify-content: center;
+}
+.lead-success-overlay.open { display: flex; }
+
+.lead-success-box {
+  background: white;
+  border-radius: 24px;
+  padding: 48px 40px;
+  text-align: center;
+  width: 400px;
+  max-width: calc(100vw - 40px);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.2);
+  animation: modalIn 0.25s ease;
+}
+.ls-icon { font-size: 56px; margin-bottom: 16px; }
+.ls-title { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 10px; }
+.ls-text { font-size: 15px; color: var(--text2); line-height: 1.6; margin-bottom: 28px; }
+.ls-close { background: var(--accent); color: white; border: none; border-radius: 12px; padding: 13px 32px; font-size: 15px; font-weight: 500; cursor: pointer; transition: background 0.15s; }
+.ls-close:hover { background: var(--accent-hover); }
+
+.iphone-svg { filter: drop-shadow(0 16px 32px rgba(0,0,0,0.16)); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">Top Shop</div>
+  <div class="nav-links">
+    <span class="nav-link" onclick="showPage('home')">Home</span>
+    <span class="nav-link" onclick="showPage('catalog')">iPhone 17</span>
+    <span class="nav-link" onclick="openSupport()">Support</span>
+  </div>
+  <button class="nav-cart" onclick="showPage('cart')">
+    🛒 Cart <span class="cart-badge" id="cartCount">0</span>
+  </button>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<!-- ═══ SUPPORT MODAL ═══ -->
+<div class="modal-overlay" id="supportOverlay" onclick="closeSupport(event)">
+  <div class="support-modal">
+    <button class="modal-close" onclick="closeSupport()">✕</button>
+    <div class="modal-badge">🎧</div>
+    <div class="modal-title">Contact Support</div>
+    <div class="modal-sub">We usually respond within 30 minutes. Average resolution time: 2 hours.</div>
+
+    <div class="support-tags">
+      <button class="stag on" onclick="selTag(this)">Order issue</button>
+      <button class="stag" onclick="selTag(this)">Warranty</button>
+      <button class="stag" onclick="selTag(this)">Return & Refund</button>
+      <button class="stag" onclick="selTag(this)">Technical help</button>
+      <button class="stag" onclick="selTag(this)">Other</button>
+    </div>
+
+    <form id="supportForm" onsubmit="submitSupport(event)">
+      <div class="sg">
+        <label class="sl">Your Email</label>
+        <input class="si" type="email" id="suppEmail" placeholder="john@example.com" required>
+      </div>
+      <div class="sg">
+        <label class="sl">Order Number (optional)</label>
+        <input class="si" type="text" placeholder="ORD-123456">
+      </div>
+      <div class="sg">
+        <label class="sl">Describe your issue</label>
+        <textarea class="si textarea" id="suppMsg" placeholder="Tell us what happened in detail — the more info you share, the faster we can help." required></textarea>
+      </div>
+      <div class="support-footer">
+        <button type="button" class="support-cancel" onclick="closeSupport()">Cancel</button>
+        <button type="submit" class="support-submit">Send Request →</button>
+      </div>
+    </form>
+
+    <div id="suppSuccess" style="display:none;text-align:center;padding:20px 0;">
+      <div style="font-size:48px;margin-bottom:12px;">✅</div>
+      <div style="font-size:20px;font-weight:700;margin-bottom:8px;">Request sent!</div>
+      <div style="font-size:14px;color:var(--text2);line-height:1.6">We received your message and will reply to your email within 30 minutes.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LEAD SUCCESS MODAL ═══ -->
+<div class="lead-success-overlay" id="leadSuccessOverlay" onclick="closeLeadSuccess(event)">
+  <div class="lead-success-box" id="leadSuccessBox">
+    <div class="ls-icon">📞</div>
+    <div class="ls-title">Заявка отправлена!</div>
+    <div class="ls-text">Наш специалист перезвонит вам в течение 15 минут. Ожидайте звонка!</div>
+    <button class="ls-close" onclick="closeLeadSuccess()">Отлично, спасибо!</button>
+  </div>
+</div>
+
+<!-- ═══ HOME ═══ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">New · 2026</div>
+      <div class="hero-title">iPhone 17.<br>Built for<br>Intelligence.</div>
+      <div class="hero-sub">The most powerful iPhone ever. A19 Pro chip, titanium design, and Apple Intelligence — all in your hands.</div>
+      <div class="hero-actions">
+        <button class="btn-blue" onclick="showPage('catalog')">Shop iPhone 17</button>
+        <button class="btn-ghost" onclick="showPage('catalog')">Compare Models</button>
+      </div>
+    </div>
+    <div class="hero-phones">
+      <div class="iphone-wrap small">
+        <svg viewBox="0 0 120 240" xmlns="http://www.w3.org/2000/svg" class="iphone-svg">
+          <rect x="2" y="2" width="116" height="236" rx="26" ry="26" fill="#b8b8a8" stroke="#9a9a8a" stroke-width="1"/>
+          <rect x="8" y="8" width="104" height="224" rx="21" ry="21" fill="#050505"/>
+          <rect x="9" y="9" width="102" height="222" rx="20" ry="20" fill="url(#hs1)"/>
+          <defs>
+            <linearGradient id="hs1" x1="0%" y1="0%" x2="60%" y2="100%">
+              <stop offset="0%" style="stop-color:#0a3d62"/><stop offset="50%" style="stop-color:#1e5799"/><stop offset="100%" style="stop-color:#2980b9"/>
+            </linearGradient>
+          </defs>
+          <rect x="38" y="16" width="44" height="14" rx="7" fill="#000"/>
+          <rect x="0" y="60" width="2.5" height="22" rx="1.5" fill="#9a9a8a"/>
+          <rect x="0" y="88" width="2.5" height="34" rx="1.5" fill="#9a9a8a"/>
+          <rect x="117.5" y="70" width="2.5" height="40" rx="1.5" fill="#9a9a8a"/>
+          <text x="60" y="105" font-family="sans-serif" font-size="28" fill="white" text-anchor="middle" font-weight="300" opacity="0.95">8:15</text>
+          <text x="60" y="122" font-family="sans-serif" font-size="7.5" fill="rgba(255,255,255,0.55)" text-anchor="middle">Wednesday, March 4</text>
+          <ellipse cx="60" cy="170" rx="28" ry="18" fill="rgba(255,255,255,0.07)"/>
+          <text x="60" y="175" font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.4)" text-anchor="middle">Unlock</text>
+        </svg>
+      </div>
+      <div class="iphone-wrap large">
+        <svg viewBox="0 0 140 280" xmlns="http://www.w3.org/2000/svg" class="iphone-svg">
+          <rect x="2" y="2" width="136" height="276" rx="30" ry="30" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1"/>
+          <rect x="8" y="8" width="124" height="264" rx="25" ry="25" fill="#050505"/>
+          <rect x="9" y="9" width="122" height="262" rx="24" ry="24" fill="url(#hs2)"/>
+          <defs>
+            <linearGradient id="hs2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#0d0d0d"/><stop offset="40%" style="stop-color:#1a0a2e"/><stop offset="100%" style="stop-color:#0a0a1a"/>
+            </linearGradient>
+          </defs>
+          <rect x="47" y="18" width="46" height="14" rx="7" fill="#000"/>
+          <rect x="0" y="72" width="3" height="26" rx="1.5" fill="#222"/>
+          <rect x="0" y="104" width="3" height="40" rx="1.5" fill="#222"/>
+          <rect x="0" y="150" width="3" height="40" rx="1.5" fill="#222"/>
+          <rect x="137" y="84" width="3" height="50" rx="1.5" fill="#222"/>
+          <!-- Aurora wallpaper -->
+          <ellipse cx="40" cy="80" rx="45" ry="30" fill="#00c6ff" opacity="0.12"/>
+          <ellipse cx="90" cy="120" rx="50" ry="25" fill="#7b2ff7" opacity="0.10"/>
+          <ellipse cx="50" cy="160" rx="40" ry="22" fill="#00e5ff" opacity="0.09"/>
+          <text x="70" y="115" font-family="sans-serif" font-size="36" fill="white" text-anchor="middle" font-weight="200" opacity="0.95">9:41</text>
+          <text x="70" y="136" font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.5)" text-anchor="middle">Friday, January 17</text>
+          <rect x="25" y="218" width="24" height="24" rx="6" fill="#2c7be5"/>
+          <rect x="57" y="218" width="24" height="24" rx="6" fill="#34c759"/>
+          <rect x="89" y="218" width="24" height="24" rx="6" fill="#ff9f0a"/>
+          <rect x="0" y="0" width="140" height="262" rx="24" fill="url(#dock2)" opacity="0.3"/>
+          <defs><linearGradient id="dock2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="60%" stop-color="transparent"/><stop offset="100%" stop-color="black" stop-opacity="0.4"/></linearGradient></defs>
+        </svg>
+      </div>
+      <div class="iphone-wrap medium">
+        <svg viewBox="0 0 120 240" xmlns="http://www.w3.org/2000/svg" class="iphone-svg">
+          <rect x="2" y="2" width="116" height="236" rx="26" ry="26" fill="#c4a882" stroke="#b09060" stroke-width="1"/>
+          <rect x="8" y="8" width="104" height="224" rx="21" ry="21" fill="#050505"/>
+          <rect x="9" y="9" width="102" height="222" rx="20" ry="20" fill="url(#hs3)"/>
+          <defs>
+            <linearGradient id="hs3" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#1a0000"/><stop offset="50%" style="stop-color:#3d0c02"/><stop offset="100%" style="stop-color:#1a0a00"/>
+            </linearGradient>
+          </defs>
+          <rect x="38" y="16" width="44" height="14" rx="7" fill="#000"/>
+          <rect x="0" y="60" width="2.5" height="22" rx="1.5" fill="#b09060"/>
+          <rect x="0" y="88" width="2.5" height="34" rx="1.5" fill="#b09060"/>
+          <rect x="117.5" y="70" width="2.5" height="40" rx="1.5" fill="#b09060"/>
+          <!-- Sunset glow -->
+          <ellipse cx="60" cy="160" rx="50" ry="30" fill="#ff6b35" opacity="0.18"/>
+          <ellipse cx="60" cy="180" rx="55" ry="20" fill="#ff9500" opacity="0.12"/>
+          <text x="60" y="105" font-family="sans-serif" font-size="28" fill="white" text-anchor="middle" font-weight="300" opacity="0.95">6:30</text>
+          <text x="60" y="122" font-family="sans-serif" font-size="7.5" fill="rgba(255,255,255,0.55)" text-anchor="middle">Saturday, February 8</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-top">
+      <div class="section-title">iPhone 17 Lineup</div>
+      <div class="section-sub">All models · 2026</div>
+    </div>
+    <div class="grid" id="homeGrid"></div>
+  </div>
+
+  <!-- LEAD FORM -->
+  <div class="lead-section">
+    <div>
+      <div class="lead-eyebrow">// Get a callback</div>
+      <div class="lead-title">Have questions?<br>We'll call you back.</div>
+      <div class="lead-sub">Leave your number and our Apple-certified specialist will call you within 15 minutes to help you choose the right iPhone 17.</div>
+    </div>
+    <div class="lead-form-box">
+      <div class="lf-title">Request a Call</div>
+      <div class="lf-sub">We're available Mon–Sat, 9:00–21:00</div>
+      <form id="leadForm" onsubmit="submitLead(event)">
+        <div class="lf-group"><label class="lf-label">Your Name</label><input class="lf-input" type="text" placeholder="John Smith" required></div>
+        <div class="lf-group"><label class="lf-label">Phone Number</label><input class="lf-input" type="tel" placeholder="+1 (555) 000-0000" required></div>
+        <div class="lf-group"><label class="lf-label">Question (optional)</label><input class="lf-input" type="text" placeholder="Which iPhone 17 is right for me?"></div>
+        <button type="submit" class="lf-btn">Request Callback →</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">Top Shop</div>
+        <div class="footer-tagline">Your authorized iPhone reseller. Official products, expert advice, and same-day delivery across the US.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Products</div>
+        <div class="footer-links">
+          <span class="footer-link" onclick="showPage('catalog')">iPhone 17 Pro Max</span>
+          <span class="footer-link" onclick="showPage('catalog')">iPhone 17 Pro</span>
+          <span class="footer-link" onclick="showPage('catalog')">iPhone 17</span>
+          <span class="footer-link" onclick="showPage('catalog')">iPhone 17 Air</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Support</div>
+        <div class="footer-links">
+          <span class="footer-link" onclick="openSupport()">Contact Support</span>
+          <span class="footer-link">Shipping Info</span>
+          <span class="footer-link">Returns & Refunds</span>
+          <span class="footer-link">Warranty</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <div class="footer-links">
+          <span class="footer-link">About Us</span>
+          <span class="footer-link">Blog</span>
+          <span class="footer-link">Careers</span>
+          <span class="footer-link">Privacy Policy</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Top Shop. All rights reserved. Apple and iPhone are trademarks of Apple Inc.</div>
+      <div class="footer-legal"><span>Privacy</span><span>Terms</span><span>Cookies</span></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══ CATALOG ═══ -->
+<div class="page" id="page-catalog">
+  <div class="section">
+    <div class="section-top">
+      <div class="section-title">iPhone 17 — All Models</div>
+      <div class="section-sub">6 models · Starting from $799</div>
+    </div>
+    <div class="grid" id="catalogGrid"></div>
+  </div>
+  <div class="lead-section">
+    <div>
+      <div class="lead-eyebrow">// Expert advice</div>
+      <div class="lead-title">Not sure which<br>model to choose?</div>
+      <div class="lead-sub">Our specialists will help you pick the perfect iPhone 17 for your needs and budget.</div>
+    </div>
+    <div class="lead-form-box">
+      <div class="lf-title">Get Expert Advice</div>
+      <div class="lf-sub">Free callback within 15 minutes</div>
+      <form onsubmit="submitLead(event)">
+        <div class="lf-group"><label class="lf-label">Your Name</label><input class="lf-input" type="text" placeholder="John Smith" required></div>
+        <div class="lf-group"><label class="lf-label">Phone Number</label><input class="lf-input" type="tel" placeholder="+1 (555) 000-0000" required></div>
+        <button type="submit" class="lf-btn">Request Callback →</button>
+      </form>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-top">
+      <div><div class="footer-logo">Top Shop</div><div class="footer-tagline">Your authorized iPhone reseller. Same-day delivery.</div></div>
+      <div><div class="footer-col-title">Products</div><div class="footer-links"><span class="footer-link">iPhone 17 Pro Max</span><span class="footer-link">iPhone 17 Pro</span><span class="footer-link">iPhone 17</span><span class="footer-link">iPhone 17 Air</span></div></div>
+      <div><div class="footer-col-title">Support</div><div class="footer-links"><span class="footer-link" onclick="openSupport()">Contact</span><span class="footer-link">Shipping</span><span class="footer-link">Returns</span></div></div>
+      <div><div class="footer-col-title">Company</div><div class="footer-links"><span class="footer-link">About</span><span class="footer-link">Blog</span><span class="footer-link">Privacy</span></div></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2026 Top Shop. Apple and iPhone are trademarks of Apple Inc.</div><div class="footer-legal"><span>Privacy</span><span>Terms</span></div></div>
+  </footer>
+</div>
+
+<!-- ═══ PRODUCT ═══ -->
+<div class="page" id="page-product">
+  <div class="product-wrap">
+    <button class="back-link" onclick="showPage('catalog')">← All iPhones</button>
+    <div class="product-grid">
+      <div class="product-visual" id="prodVisual"></div>
+      <div>
+        <div class="product-eyebrow" id="prodEyebrow"></div>
+        <div class="product-name" id="prodName"></div>
+        <div class="product-variant" id="prodVariant"></div>
+        <div class="product-price" id="prodPrice"></div>
+        <div class="specs" id="prodSpecs"></div>
+        <div class="storage-label">Storage</div>
+        <div class="storage-row" id="prodStorage"></div>
+        <button class="atc" id="prodATC">Add to Cart</button>
+        <button class="wish">♡ Save to Wishlist</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CART ═══ -->
+<div class="page" id="page-cart">
+  <div class="cart-wrap">
+    <button class="back-link" onclick="showPage('catalog')">← Continue Shopping</button>
+    <div class="cart-h1">Your Cart</div>
+    <div id="cartContent"></div>
+  </div>
+</div>
+
+<!-- ═══ CHECKOUT ═══ -->
+<div class="page" id="page-checkout">
+  <div class="checkout-wrap">
+    <button class="back-link" onclick="showPage('cart')">← Back to Cart</button>
+    <div class="checkout-h1">Checkout</div>
+    <div class="order-mini" id="checkoutMini"></div>
+    <form class="form" onsubmit="placeOrder(event)">
+      <div class="form-row2">
+        <div class="fg"><label class="fl">First Name</label><input class="fi" type="text" placeholder="John" required></div>
+        <div class="fg"><label class="fl">Last Name</label><input class="fi" type="text" placeholder="Doe" required></div>
+      </div>
+      <div class="fg"><label class="fl">Email</label><input class="fi" type="email" placeholder="john@example.com" required></div>
+      <div class="fg"><label class="fl">Phone</label><input class="fi" type="tel" placeholder="+1 (555) 000-0000"></div>
+      <div class="fg"><label class="fl">Address</label><input class="fi" type="text" placeholder="123 Main St, New York, NY 10001" required></div>
+      <div class="fg"><label class="fl">Card Number</label><input class="fi" type="text" placeholder="4242 4242 4242 4242" required></div>
+      <div class="form-row2">
+        <div class="fg"><label class="fl">Expiry</label><input class="fi" type="text" placeholder="MM/YY" required></div>
+        <div class="fg"><label class="fl">CVV</label><input class="fi" type="text" placeholder="123" required></div>
+      </div>
+      <button type="submit" class="po-btn">Place Order →</button>
+    </form>
+  </div>
+</div>
+
+<!-- ═══ THANK YOU ═══ -->
+<div class="page" id="page-thankyou">
+  <div class="ty-wrap">
+    <div class="ty-circle">✓</div>
+    <div class="ty-h1">Order Confirmed!</div>
+    <div class="ty-p">Your iPhone 17 is on its way. We'll send a confirmation to your email shortly.</div>
+    <div class="ty-order" id="tyOrderId"></div>
+    <button class="btn-blue" onclick="showPage('home')">Continue Shopping</button>
+  </div>
+</div>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+/* ── ЭКРАНЫ ПО ПРОДУКТАМ — у каждого свой цвет и время ── */
+const SCREENS = {
+  'iph17promax-black': {
+    g1:'#0d0d0d', g2:'#1a0a2e',
+    deco: `<ellipse cx="40" cy="90" rx="45" ry="28" fill="#00c6ff" opacity="0.10"/>
+           <ellipse cx="95" cy="130" rx="50" ry="22" fill="#7b2ff7" opacity="0.09"/>`,
+    time:'9:41', date:'Friday, January 17'
+  },
+  'iph17promax-desert': {
+    g1:'#1a0500', g2:'#3d1a05',
+    deco: `<ellipse cx="70" cy="160" rx="55" ry="30" fill="#ff6b35" opacity="0.18"/>
+           <ellipse cx="70" cy="180" rx="60" ry="20" fill="#ffb347" opacity="0.10"/>`,
+    time:'7:28', date:'Saturday, February 8'
+  },
+  'iph17pro-natural': {
+    g1:'#0a1a0a', g2:'#1a3a1a',
+    deco: `<ellipse cx="30" cy="80" rx="40" ry="25" fill="#34c759" opacity="0.12"/>
+           <ellipse cx="100" cy="150" rx="45" ry="20" fill="#00e5a0" opacity="0.08"/>`,
+    time:'11:05', date:'Monday, April 14'
+  },
+  'iph17-midnight': {
+    g1:'#05080f', g2:'#0a1428',
+    deco: `<circle cx="70" cy="130" r="40" fill="rgba(255,255,255,0.03)"/>
+           <circle cx="70" cy="130" r="28" fill="rgba(255,255,255,0.03)"/>`,
+    time:'2:17', date:'Tuesday, June 3'
+  },
+  'iph17-starlight': {
+    g1:'#10101e', g2:'#1a1a30',
+    deco: `<ellipse cx="50" cy="100" rx="40" ry="20" fill="#e8d5ff" opacity="0.10"/>
+           <ellipse cx="90" cy="160" rx="40" ry="18" fill="#c8b4f8" opacity="0.08"/>`,
+    time:'4:52', date:'Thursday, July 17'
+  },
+  'iph17air-blue': {
+    g1:'#021020', g2:'#082040',
+    deco: `<ellipse cx="70" cy="100" rx="55" ry="30" fill="#34aadc" opacity="0.14"/>
+           <ellipse cx="70" cy="170" rx="50" ry="20" fill="#007aff" opacity="0.10"/>`,
+    time:'6:00', date:'Wednesday, August 20'
+  },
+};
+
+/* ── ГЕНЕРАЦИЯ SVG ТЕЛЕФОНА ── */
+function phoneSVG(caseColor, stroke, sideColor, id, size = 200) {
+  const sc = SCREENS[id] || SCREENS['iph17promax-black'];
+  const gId = 'g' + Math.random().toString(36).slice(2,7);
+
+  /* размер шрифтов зависит от размера SVG */
+  const big = size >= 180;
+  const tSz  = big ? 36 : 18;
+  const dSz  = big ? 9  : 5.5;
+  const tY   = big ? 162 : 118;
+  const dY   = big ? 180 : 130;
+
+  return `<svg viewBox="0 0 140 280" xmlns="http://www.w3.org/2000/svg" class="iphone-svg" width="${size}" style="display:block">
+    <rect x="2" y="2" width="136" height="276" rx="30" ry="30" fill="${caseColor}" stroke="${stroke}" stroke-width="1.5"/>
+    <rect x="8" y="8" width="124" height="264" rx="25" ry="25" fill="#050505"/>
+    <rect x="9" y="9" width="122" height="262" rx="24" ry="24" fill="url(#${gId})"/>
+    <defs>
+      <linearGradient id="${gId}" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:${sc.g1}"/>
+        <stop offset="100%" style="stop-color:${sc.g2}"/>
+      </linearGradient>
+    </defs>
+    ${sc.deco}
+    <rect x="47" y="18" width="46" height="14" rx="7" fill="#000"/>
+    <circle cx="107" cy="25" r="5" fill="#111"/>
+    <rect x="0" y="80" width="3" height="28" rx="1.5" fill="${sideColor}"/>
+    <rect x="0" y="116" width="3" height="42" rx="1.5" fill="${sideColor}"/>
+    <rect x="0" y="164" width="3" height="42" rx="1.5" fill="${sideColor}"/>
+    <rect x="137" y="94" width="3" height="54" rx="1.5" fill="${sideColor}"/>
+    <text x="70" y="${tY}" font-family="-apple-system,sans-serif" font-size="${tSz}" fill="white" text-anchor="middle" font-weight="200" opacity="0.95">${sc.time}</text>
+    <text x="70" y="${dY}" font-family="-apple-system,sans-serif" font-size="${dSz}" fill="rgba(255,255,255,0.5)" text-anchor="middle">${sc.date}</text>
+  </svg>`;
+}
+
+const PHONES = {
+  'iph17promax-black':  ['#1c1c1e','#2c2c2e','#3c3c3e'],
+  'iph17promax-desert': ['#c4a882','#a88960','#b09070'],
+  'iph17pro-natural':   ['#b8b8a8','#9a9a8a','#aaaaaa'],
+  'iph17-midnight':     ['#1c2340','#141b33','#1c2340'],
+  'iph17-starlight':    ['#e8e4d8','#ccc8bc','#d8d4c8'],
+  'iph17air-blue':      ['#a8c8e8','#88a8c8','#98b8d8'],
+};
+
+const PRODUCTS = [
+  { id:'iph17promax-black',  name:'iPhone 17 Pro Max', color:'Black Titanium',  model:'Pro Max',  price:1299, badge:'Best Seller', specs:{Display:'6.9" ProMotion',Chip:'A19 Pro',Camera:'108MP Triple',Battery:'5000 mAh'}, storage:['256GB','512GB','1TB'] },
+  { id:'iph17promax-desert', name:'iPhone 17 Pro Max', color:'Desert Titanium', model:'Pro Max',  price:1299, badge:'New Color',   specs:{Display:'6.9" ProMotion',Chip:'A19 Pro',Camera:'108MP Triple',Battery:'5000 mAh'}, storage:['256GB','512GB','1TB'] },
+  { id:'iph17pro-natural',   name:'iPhone 17 Pro',     color:'Natural Titanium',model:'Pro',      price:1099, badge:null,          specs:{Display:'6.3" ProMotion',Chip:'A19 Pro',Camera:'48MP Triple', Battery:'4500 mAh'}, storage:['128GB','256GB','512GB'] },
+  { id:'iph17-midnight',     name:'iPhone 17',         color:'Midnight',        model:'Standard', price:899,  badge:null,          specs:{Display:'6.1" OLED',     Chip:'A19',     Camera:'48MP Dual',   Battery:'4000 mAh'}, storage:['128GB','256GB'] },
+  { id:'iph17-starlight',    name:'iPhone 17',         color:'Starlight',       model:'Standard', price:899,  badge:null,          specs:{Display:'6.1" OLED',     Chip:'A19',     Camera:'48MP Dual',   Battery:'4000 mAh'}, storage:['128GB','256GB'] },
+  { id:'iph17air-blue',      name:'iPhone 17 Air',     color:'Sky Blue',        model:'Air',      price:799,  badge:'Thinnest Ever',specs:{Display:'6.6" OLED',    Chip:'A19',     Camera:'48MP Single', Battery:'3800 mAh'}, storage:['128GB','256GB'] },
+];
+
+let cart = [], curProduct = null, curStorage = null;
+function cartTotal() { return cart.reduce((s,i) => s+i.price*i.qty, 0); }
+function cartCount() { return cart.reduce((s,i) => s+i.qty, 0); }
+function updateBadge() { document.getElementById('cartCount').textContent = cartCount(); }
+
+/* ── СТРАНИЦЫ ── */
+function showPage(p, id) {
+  document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  window.scrollTo(0,0);
+  if (p==='product'&&id) loadProduct(id);
+  if (p==='cart') renderCart();
+  if (p==='checkout') { renderCheckoutMini(); fireBeginCheckout(); }
+}
+
+/* ── КАРТОЧКА ── */
+function mkCard(p) {
+  const ph = PHONES[p.id];
+  const div = document.createElement('div');
+  div.className = 'card';
+  div.innerHTML = `
+    <div class="card-img">
+      ${p.badge ? `<div class="card-tag">${p.badge}</div>` : ''}
+      ${phoneSVG(ph[0], ph[1], ph[2], p.id, 115)}
+    </div>
+    <div class="card-body">
+      <div class="card-model">${p.model}</div>
+      <div class="card-name">${p.name}</div>
+      <div class="card-color">${p.color}</div>
+      <div class="card-footer">
+        <div class="card-price">$${p.price}</div>
+        <button class="card-add" onclick="event.stopPropagation();quickAdd('${p.id}')">Add to Cart</button>
+      </div>
+    </div>`;
+  div.addEventListener('click', () => { showPage('product', p.id); dlViewItem(p); });
+  return div;
+}
+
+function renderGrids() {
+  ['homeGrid','catalogGrid'].forEach(gid => {
+    const el = document.getElementById(gid);
+    if (el) PRODUCTS.forEach(p => el.appendChild(mkCard(p)));
+  });
+}
+
+/* ── СТРАНИЦА ПРОДУКТА ── */
+function loadProduct(id) {
+  const p = PRODUCTS.find(x=>x.id===id); if(!p) return;
+  curProduct = p; curStorage = p.storage[0];
+  const ph = PHONES[id];
+  document.getElementById('prodVisual').innerHTML = phoneSVG(ph[0], ph[1], ph[2], id, 220);
+  document.getElementById('prodEyebrow').textContent = `iPhone 17 · ${p.model}`;
+  document.getElementById('prodName').textContent = p.name;
+  document.getElementById('prodVariant').textContent = p.color;
+  document.getElementById('prodPrice').textContent = `$${p.price}`;
+  document.getElementById('prodSpecs').innerHTML = Object.entries(p.specs).map(([k,v])=>`<div class="spec"><div class="spec-key">${k}</div><div class="spec-val">${v}</div></div>`).join('');
+  document.getElementById('prodStorage').innerHTML = p.storage.map((s,i)=>`<button class="s-btn ${i===0?'on':''}" onclick="selStorage(this,'${s}')">${s}</button>`).join('');
+  document.getElementById('prodATC').onclick = () => addToCart(id);
+}
+function selStorage(btn, s) { document.querySelectorAll('.s-btn').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); curStorage=s; }
+
+/* ── КОРЗИНА ── */
+function addToCart(id) {
+  const p = PRODUCTS.find(x=>x.id===id);
+  const ex = cart.find(i=>i.id===id&&i.storage===curStorage);
+  if(ex) ex.qty++; else cart.push({...p, storage:curStorage, qty:1});
+  updateBadge(); toast(`${p.name} added ✓`); dlAddToCart(p);
+}
+function quickAdd(id) {
+  const p = PRODUCTS.find(x=>x.id===id);
+  const ex = cart.find(i=>i.id===id);
+  if(ex) ex.qty++; else cart.push({...p, storage:p.storage[0], qty:1});
+  updateBadge(); toast(`${p.name} added ✓`); dlAddToCart(p);
+}
+function changeQty(id, d) {
+  const item = cart.find(i=>i.id===id); if(!item) return;
+  item.qty += d;
+  if(item.qty<=0) cart = cart.filter(i=>i.id!==id);
+  updateBadge(); renderCart();
+}
+function renderCart() {
+  const el = document.getElementById('cartContent');
+  if(!cart.length) { el.innerHTML=`<div class="empty-cart"><div class="empty-icon">🛒</div><div class="empty-txt">Your cart is empty</div><button class="btn-blue" onclick="showPage('catalog')">Browse iPhone 17</button></div>`; return; }
+  const items = cart.map(item => {
+    const ph = PHONES[item.id];
+    return `<div class="c-item">
+      <div class="c-thumb">${phoneSVG(ph[0],ph[1],ph[2],item.id,60)}</div>
+      <div><div class="c-name">${item.name}</div><div class="c-sub">${item.color} · ${item.storage}</div>
+      <div class="qty-row"><button class="qty-b" onclick="changeQty('${item.id}',-1)">−</button><span class="qty-n">${item.qty}</span><button class="qty-b" onclick="changeQty('${item.id}',1)">+</button></div></div>
+      <div><div class="c-price">$${item.price*item.qty}</div><button class="c-rm" onclick="changeQty('${item.id}',-99)">Remove</button></div>
+    </div>`;
+  }).join('');
+  const total = cartTotal(), tax = Math.round(total*0.08);
+  el.innerHTML = `${items}<div class="summary-box">
+    <div class="s-row"><span>Subtotal</span><span>$${total}</span></div>
+    <div class="s-row"><span>Shipping</span><span style="color:var(--green)">Free</span></div>
+    <div class="s-row"><span>Tax (8%)</span><span>$${tax}</span></div>
+    <div class="s-row bold"><span>Total</span><span>$${total+tax}</span></div>
+    <button class="ch-btn" onclick="showPage('checkout')">Proceed to Checkout →</button>
+  </div>`;
+}
+function renderCheckoutMini() {
+  const total = cartTotal(), tax = Math.round(total*0.08);
+  document.getElementById('checkoutMini').innerHTML = `<div class="om-title">Order Summary</div>${cart.map(i=>`<div class="om-row"><span>${i.name} ×${i.qty}</span><span>$${i.price*i.qty}</span></div>`).join('')}<div class="om-total"><span>Total</span><span>$${total+tax}</span></div>`;
+}
+function placeOrder(e) {
+  e.preventDefault();
+  const oid = 'ORD-' + Date.now().toString().slice(-6);
+  const total = cartTotal(), tax = Math.round(total*0.08);
+  dataLayer.push({ecommerce:null});
+  dataLayer.push({event:'purchase',ecommerce:{transaction_id:oid,value:total+tax,tax,shipping:0,currency:'USD',items:cart.map(i=>({item_id:i.id,item_name:i.name,item_variant:i.color,price:i.price,quantity:i.qty}))}});
+  cart=[]; updateBadge();
+  document.getElementById('tyOrderId').textContent = `Order ID: ${oid}`;
+  showPage('thankyou');
+}
+
+/* ── LEAD ФОРМА → всплывает модал по центру ── */
+function submitLead(e) {
+  e.preventDefault();
+  dataLayer.push({ event:'lead_form_submit', form_type:'callback' });
+  e.target.reset();
+  document.getElementById('leadSuccessOverlay').classList.add('open');
+}
+function closeLeadSuccess(e) {
+  if (!e || e.target === document.getElementById('leadSuccessOverlay') || e.currentTarget.tagName === 'BUTTON') {
+    document.getElementById('leadSuccessOverlay').classList.remove('open');
+  }
+}
+
+/* ── SUPPORT MODAL ── */
+function openSupport() {
+  document.getElementById('supportOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeSupport(e) {
+  if (!e || e.target === document.getElementById('supportOverlay') || e.currentTarget.tagName !== 'DIV') {
+    document.getElementById('supportOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+function selTag(btn) {
+  document.querySelectorAll('.stag').forEach(t => t.classList.remove('on'));
+  btn.classList.add('on');
+}
+function submitSupport(e) {
+  e.preventDefault();
+  dataLayer.push({ event:'support_form_submit', topic: document.querySelector('.stag.on')?.textContent });
+  document.getElementById('supportForm').style.display = 'none';
+  document.getElementById('suppSuccess').style.display = 'block';
+  setTimeout(() => {
+    closeSupport();
+    document.getElementById('supportForm').style.display = 'block';
+    document.getElementById('suppSuccess').style.display = 'none';
+    document.getElementById('supportForm').reset();
+  }, 3000);
+}
+
+/* ── dataLayer ── */
+function dlViewItem(p) { dataLayer.push({ecommerce:null}); dataLayer.push({event:'view_item',ecommerce:{currency:'USD',value:p.price,items:[{item_id:p.id,item_name:p.name,item_variant:p.color,item_category:'iPhone 17',price:p.price,quantity:1}]}}); }
+function dlAddToCart(p) { dataLayer.push({ecommerce:null}); dataLayer.push({event:'add_to_cart',ecommerce:{currency:'USD',value:p.price,items:[{item_id:p.id,item_name:p.name,item_variant:p.color,price:p.price,quantity:1}]}}); }
+function fireBeginCheckout() { dataLayer.push({ecommerce:null}); dataLayer.push({event:'begin_checkout',ecommerce:{currency:'USD',value:cartTotal(),items:cart.map(i=>({item_id:i.id,item_name:i.name,price:i.price,quantity:i.qty}))}}); }
+
+/* ── TOAST ── */
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('on');
+  setTimeout(() => t.classList.remove('on'), 2500);
+}
+
+renderGrids();
+</script>
+</body>
+</html>
