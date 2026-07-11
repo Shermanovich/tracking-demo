@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5BN2QVQX');</script>
+<!-- End Google Tag Manager -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>X-ray Analytics — Double Your Marketing ROI in 90 Days</title>
@@ -312,6 +319,11 @@ h1 em { font-style:normal; color:var(--y); }
 .sub-btn { background:var(--y); color:#000; border:none; border-radius:9px; padding:14px; font-family:'Montserrat',sans-serif; font-size:15px; font-weight:500; cursor:pointer; transition:opacity .2s; margin-top:4px; }
 .sub-btn:hover { opacity:.88; }
 .fnote { font-size:11px; color:var(--w40); text-align:center; margin-top:6px; }
+.consent-wrap { margin-top:4px; }
+.consent-label { display:flex; align-items:flex-start; gap:10px; cursor:pointer; text-align:left; }
+.consent-label input[type="checkbox"] { margin-top:3px; min-width:16px; height:16px; accent-color:var(--y); cursor:pointer; }
+.consent-label span { font-size:12px; color:var(--w40); line-height:1.6; }
+.consent-link { color:var(--y); text-decoration:underline; }
 
 /* ── FOOTER ── */
 footer { background:var(--bg); border-top:1px solid var(--border); padding:52px 48px 36px; }
@@ -341,6 +353,10 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:52px 
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5BN2QVQX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <div class="toast" id="toast"></div>
 
@@ -612,6 +628,12 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:52px 
         </select>
       </div>
       <div class="fg"><label class="fl">What's broken? (optional)</label><textarea class="fi fi-ta" placeholder="Broken events, data discrepancies, no reports..."></textarea></div>
+      <div class="fg consent-wrap">
+        <label class="consent-label">
+          <input type="checkbox" id="consentBox" required>
+          <span>By checking this box, I confirm that I have read and agree to the <a href="#" class="consent-link">Privacy Policy</a> and consent to the processing of my personal data for the purpose of receiving a free analytics audit and related communications, in accordance with applicable data protection laws.</span>
+        </label>
+      </div>
       <button type="submit" class="sub-btn">Request Free Audit →</button>
       <div class="fnote">✓ We respond within 24h &nbsp;·&nbsp; ✓ Free, no strings attached</div>
     </form>
