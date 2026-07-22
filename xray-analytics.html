@@ -612,8 +612,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p>Send us your site — we audit your analytics stack for free and show you exactly where money is leaking. 48 hours. Zero obligation.</p>
     <form class="lf" id="leadForm" onsubmit="sub(event)">
       <div class="fg2">
-        <div class="fg"><label class="fl">First Name</label><input class="fi" type="text" placeholder="John" required></div>
-        <div class="fg"><label class="fl">Last Name</label><input class="fi" type="text" placeholder="Smith" required></div>
+        <div class="fg"><label class="fl">First Name</label><input class="fi" type="text" id="lFirstName" placeholder="John" required></div>
+        <div class="fg"><label class="fl">Last Name</label><input class="fi" type="text" id="lLastName" placeholder="Smith" required></div>
       </div>
       <div class="fg"><label class="fl">Work Email</label><input class="fi" type="email" id="lEmail" placeholder="john@company.com" required></div>
       <div class="fg"><label class="fl">Website URL</label><input class="fi" type="url" id="lUrl" placeholder="https://yourstore.com" required></div>
@@ -715,7 +715,15 @@ function updCalc() {
 /* ── LEAD FORM ── */
 function sub(e) {
   e.preventDefault();
-  dataLayer.push({ event:'lead_form_submit', form_type:'audit', spend: document.getElementById('lSpend').value });
+  dataLayer.push({
+    event: 'lead_form_submit',
+    form_name: 'audit_form',
+    first_name: document.getElementById('lFirstName').value,
+    last_name: document.getElementById('lLastName').value,
+    email: document.getElementById('lEmail').value,
+    website: document.getElementById('lUrl').value,
+    ad_spend: document.getElementById('lSpend').value
+  });
   e.target.reset();
   showToast('✓ Request sent! We\'ll be in touch within 24 hours.');
 }
