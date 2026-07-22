@@ -727,7 +727,7 @@ function dl(id) { dataLayer.push({ event:'cta_click', button_id:id }); }
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('on');
-  setTimeout(()=>t.classList.remove('on'), 4000);
+  setTimeout(()=>t.classList.remove('on'), 30000);
 }
 
 /* ── SCROLL FADE IN ── */
